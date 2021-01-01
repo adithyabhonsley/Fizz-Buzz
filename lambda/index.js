@@ -7,8 +7,7 @@
 // ****************  (1) Initialize Constants  ************************
 
 const Alexa = require("ask-sdk-core");
-const https = require("https");
-const invocationName = "fizz buzz";
+const invocationName = "fizz buzz game";
 
 // ****************  (2) Intent Handlers  *****************************
 const LaunchRequestHandler = {
@@ -78,9 +77,10 @@ const UserResponseIntentHandler = {
 
     let userResponse = Alexa.getSlotValue(handlerInput.requestEnvelope, 'fizzBuzz'); // Parse fizz/buzz from user response
     
+    // If not fizz/buzz, parse number from response
     if(typeof userResponse === 'undefined') 
     {
-        userResponse = parseInt(Alexa.getSlotValue(handlerInput.requestEnvelope, 'number'), 10); // If not fizz/buzz, parse number from response
+        userResponse = parseInt(Alexa.getSlotValue(handlerInput.requestEnvelope, 'number'), 10);
     }
     
     let expectedResponse = getCorrectResponse(sessionAttributes.counter); // Generate correct user response for current turn
@@ -133,10 +133,21 @@ const PlayAgainIntentHandler = {
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         
-        let say = 'Okay, let\'s play again! I\'ll get us started ... 1';
+        let userResponse = Alexa.getSlotValue(handlerInput.requestEnvelope, 'restartGame');
+        let say = '';
         
-        // Resets counter for start of new game;
-        sessionAttributes.counter = 2;
+        // Checks for any unsupported commmands that Alexa classifies under this intent
+        if(userResponse != 'start over' && userResponse != 'play again' && userResponse != 'new game' && userResponse != 'restart game' && userResponse != 'again') 
+        {
+            say = ' Sorry, I had trouble doing what you asked. When playing the game, please make sure to respond with a single number or fizz/buzz. '+
+                                 'If you need help, simply say "help." For starting a new game, simply say "new game." If you would like to end the game, simply say "stop".';
+        }
+        else
+        {
+            say = 'Okay, let\'s play again! I\'ll get us started ... One';
+            sessionAttributes.counter = 2; // Resets counter for start of new game;
+        }
+        
     
         return handlerInput.responseBuilder
             .speak(say)
@@ -156,9 +167,20 @@ const RepeatIntentHandler = {
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         
-        // Uses counter value to get previous Alexa response
-        let say = 'I had said ' + (getCorrectResponse(sessionAttributes.counter - 1).toString()) + '. Your turn!';
-    
+        let userResponse = Alexa.getSlotValue(handlerInput.requestEnvelope, 'repeat');
+        let say = '';
+        
+        // Checks for any unsupported commmands that Alexa classifies under this intent
+        if(userResponse != 'repeat' && userResponse != 'one more time' && userResponse != 'say that again' && userResponse != 'what did you say' && userResponse != 'once more') 
+        {
+            say = ' Sorry, I had trouble doing what you asked. When playing the game, please make sure to respond with a single number or fizz/buzz. '+
+                                 'If you need help, simply say "help." For starting a new game, simply say "new game." If you would like to end the game, simply say "stop".';
+        }
+        else
+        {
+            say = 'I had said ' + (getCorrectResponse(sessionAttributes.counter - 1).toString()) + '. Your turn!';
+        }
+        
         return handlerInput.responseBuilder
             .speak(say)
             .reprompt(say)
@@ -220,9 +242,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         UserResponseIntentHandler,
-        //NumberResponseIntent,
         RepeatIntentHandler,
-        //FizzBuzzIntentHandler,
         PlayAgainIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,

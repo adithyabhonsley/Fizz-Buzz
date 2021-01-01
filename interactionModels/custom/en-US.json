@@ -66,27 +66,26 @@
         },
         {
           "name": "RepeatIntent",
-          "slots": [],
+          "slots": [
+            {
+              "name": "repeat",
+              "type": "repeat"
+            }
+          ],
           "samples": [
-            "continue",
-            "what did you say",
-            "come again",
-            "once more",
-            "say that again",
-            "repeat"
+            "{repeat}"
           ]
         },
         {
           "name": "PlayAgainIntent",
-          "slots": [],
+          "slots": [
+            {
+              "name": "restartGame",
+              "type": "restartGame"
+            }
+          ],
           "samples": [
-            "yes",
-            "new",
-            "new game",
-            "start over",
-            "repeat game",
-            "again",
-            "play again"
+            "{restartGame}"
           ]
         }
       ],
@@ -110,9 +109,74 @@
             }
           ],
           "name": "fizzBuzz"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "what did you say"
+              }
+            },
+            {
+              "name": {
+                "value": "one more time"
+              }
+            },
+            {
+              "name": {
+                "value": "repeat"
+              }
+            },
+            {
+              "name": {
+                "value": "once more"
+              }
+            },
+            {
+              "name": {
+                "value": "say that again"
+              }
+            }
+          ],
+          "name": "repeat"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "start game over"
+              }
+            },
+            {
+              "name": {
+                "value": "restart game"
+              }
+            },
+            {
+              "name": {
+                "value": "again"
+              }
+            },
+            {
+              "name": {
+                "value": "new game"
+              }
+            },
+            {
+              "name": {
+                "value": "start over"
+              }
+            },
+            {
+              "name": {
+                "value": "play again"
+              }
+            }
+          ],
+          "name": "restartGame"
         }
       ]
     }
   },
-  "version": "12"
+  "version": "22"
 }

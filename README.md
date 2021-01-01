@@ -21,6 +21,5 @@ If you missed what she said, just ask "repeat" or "what did you say?"
 See how high you can go! 
 
 ## Built With
-## Built With
 * [Node.js](https://nodejs.org/en/docs/) - The web framework used
 * [Alexa Skills Kit SDK](https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs) - Event Handling and Skill Features

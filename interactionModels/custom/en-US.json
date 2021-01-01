@@ -1,0 +1,88 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "fizz buzz game",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "what are the rules",
+            "need rules",
+            "need instructions",
+            "what to do",
+            "I\u0027m stuck",
+            "how to play",
+            "game rules",
+            "rules",
+            "I need help",
+            "I\u0027m confused",
+            "confused",
+            "need help",
+            "instructions",
+            "help"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+            "stop fizz buzz",
+            "stop game",
+            "quit game",
+            "quit",
+            "leave fizz buzz",
+            "leave game",
+            "leave",
+            "exit game",
+            "exit",
+            "end",
+            "end game",
+            "stop"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "NumberResponseIntent",
+          "slots": [
+            {
+              "name": "number",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "fizzz buzz",
+            "fiz buz",
+            "fizzz buzzz",
+            "buzzz",
+            "fizzz",
+            "buz",
+            "fiz",
+            "fizz buzz",
+            "buzz",
+            "fizz",
+            "{number}"
+          ]
+        },
+        {
+          "name": "RepeatIntent",
+          "slots": [],
+          "samples": [
+            "what did you say",
+            "come again",
+            "once more",
+            "say that again",
+            "repeat"
+          ]
+        }
+      ],
+      "types": []
+    }
+  },
+  "version": "5"
+}

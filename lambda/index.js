@@ -171,7 +171,7 @@ const RepeatIntentHandler = {
         let say = '';
         
         // Checks for any unsupported commmands that Alexa classifies under this intent
-        if(userResponse != 'repeat' && userResponse != 'one more time' && userResponse != 'say that again' && userResponse != 'what did you say' && userResponse != 'once more') 
+        if(userResponse != 'continue' && userResponse != 'repeat' && userResponse != 'one more time' && userResponse != 'say that again' && userResponse != 'what did you say' && userResponse != 'once more') 
         {
             say = ' Sorry, I had trouble doing what you asked. When playing the game, please make sure to respond with a single number or fizz/buzz. '+
                                  'If you need help, simply say "help." For starting a new game, simply say "new game." If you would like to end the game, simply say "stop".';

@@ -63,6 +63,7 @@
           "name": "RepeatIntent",
           "slots": [],
           "samples": [
+            "continue",
             "what did you say",
             "come again",
             "once more",
@@ -80,6 +81,19 @@
           ],
           "samples": [
             "{fizzBuzz}"
+          ]
+        },
+        {
+          "name": "PlayAgainIntent",
+          "slots": [],
+          "samples": [
+            "yes",
+            "new",
+            "new game",
+            "start over",
+            "repeat game",
+            "again",
+            "play again"
           ]
         }
       ],
@@ -107,5 +121,5 @@
       ]
     }
   },
-  "version": "9"
+  "version": "11"
 }

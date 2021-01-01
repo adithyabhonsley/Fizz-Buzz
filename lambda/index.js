@@ -64,11 +64,11 @@ function getCorrectResponse(counter)
     return output;
 }
 
-// If user responds with a number, we check whether it's correct and respond appropriately
-const NumberResponseIntent = {
+// Check whether user's response is correct and respond accordingly
+const UserResponseIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NumberResponseIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'UserResponseIntent';
     },
     handle(handlerInput) {
     
@@ -76,11 +76,17 @@ const NumberResponseIntent = {
     const requestAttributes = attributesManager.getRequestAttributes();
     const sessionAttributes = attributesManager.getSessionAttributes();
 
-    let userNumber = parseInt(Alexa.getSlotValue(handlerInput.requestEnvelope, 'number'), 10); // Parse number from user response
+    let userResponse = Alexa.getSlotValue(handlerInput.requestEnvelope, 'fizzBuzz'); // Parse fizz/buzz from user response
+    
+    if(typeof userResponse === 'undefined') 
+    {
+        userResponse = parseInt(Alexa.getSlotValue(handlerInput.requestEnvelope, 'number'), 10); // If not fizz/buzz, parse number from response
+    }
+    
     let expectedResponse = getCorrectResponse(sessionAttributes.counter); // Generate correct user response for current turn
     let speakOutput = '';
     
-    if(userNumber ==  expectedResponse)
+    if(userResponse ==  expectedResponse)
     {
         sessionAttributes.counter += 2; // Update counter for next round
         speakOutput = getCorrectResponse(sessionAttributes.counter - 1); // Generates correct Alexa response for current turn
@@ -91,40 +97,6 @@ const NumberResponseIntent = {
     }
     
 
-    return handlerInput.responseBuilder
-      .speak(speakOutput)
-      .reprompt(speakOutput)
-      .getResponse();
-  },
-};
-
-// If user responds with fizz and/or buzz, we check whether it's correct and respond appropriately
-const FizzBuzzIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'FizzBuzzIntent';
-    },
-    handle(handlerInput) {
-        
-        const { attributesManager } = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const sessionAttributes = attributesManager.getSessionAttributes();
-        
-        let userResponse = Alexa.getSlotValue(handlerInput.requestEnvelope, 'fizzBuzz');
-        let counter = sessionAttributes.counter;
-        let expectedResponse = getCorrectResponse(counter);
-        let speakOutput = '';
-    
-    if(userResponse ==  expectedResponse)
-    {
-        sessionAttributes.counter += 2; // updates counter for next turn
-        counter = sessionAttributes.counter;
-        speakOutput = getCorrectResponse(sessionAttributes.counter - 1); // uses counter for Alexa correct response
-    }
-    else
-    {
-        speakOutput = 'I’m sorry, the correct response was “' + getCorrectResponse(counter) + '”. You lose! Thanks for playing Fizz Buzz. Would you like to play again or stop?';
-    }
     return handlerInput.responseBuilder
       .speak(speakOutput)
       .reprompt(speakOutput)
@@ -247,9 +219,10 @@ const skillBuilder = Alexa.SkillBuilders.custom()
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        NumberResponseIntent,
+        UserResponseIntentHandler,
+        //NumberResponseIntent,
         RepeatIntentHandler,
-        FizzBuzzIntentHandler,
+        //FizzBuzzIntentHandler,
         PlayAgainIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,

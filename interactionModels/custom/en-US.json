@@ -48,14 +48,19 @@
           "samples": []
         },
         {
-          "name": "NumberResponseIntent",
+          "name": "UserResponseIntent",
           "slots": [
             {
               "name": "number",
               "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "fizzBuzz",
+              "type": "fizzBuzz"
             }
           ],
           "samples": [
+            "{fizzBuzz}",
             "{number}"
           ]
         },
@@ -69,18 +74,6 @@
             "once more",
             "say that again",
             "repeat"
-          ]
-        },
-        {
-          "name": "FizzBuzzIntent",
-          "slots": [
-            {
-              "name": "fizzBuzz",
-              "type": "fizzBuzz"
-            }
-          ],
-          "samples": [
-            "{fizzBuzz}"
           ]
         },
         {
@@ -121,5 +114,5 @@
       ]
     }
   },
-  "version": "11"
+  "version": "12"
 }

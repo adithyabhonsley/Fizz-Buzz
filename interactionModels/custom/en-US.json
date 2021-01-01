@@ -56,16 +56,6 @@
             }
           ],
           "samples": [
-            "fizzz buzz",
-            "fiz buz",
-            "fizzz buzzz",
-            "buzzz",
-            "fizzz",
-            "buz",
-            "fiz",
-            "fizz buzz",
-            "buzz",
-            "fizz",
             "{number}"
           ]
         },
@@ -79,10 +69,43 @@
             "say that again",
             "repeat"
           ]
+        },
+        {
+          "name": "FizzBuzzIntent",
+          "slots": [
+            {
+              "name": "fizzBuzz",
+              "type": "fizzBuzz"
+            }
+          ],
+          "samples": [
+            "{fizzBuzz}"
+          ]
         }
       ],
-      "types": []
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "fizz buzz"
+              }
+            },
+            {
+              "name": {
+                "value": "buzz"
+              }
+            },
+            {
+              "name": {
+                "value": "fizz"
+              }
+            }
+          ],
+          "name": "fizzBuzz"
+        }
+      ]
     }
   },
-  "version": "5"
+  "version": "9"
 }
